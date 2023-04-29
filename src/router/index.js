@@ -15,13 +15,19 @@ const router = createRouter({
     {
       path: '/success',
       name: 'Success',
-      component: () => import('../views/Dashboard.vue')
+      component: () => import('../views/UserData.vue')
     },
 
     {
       path: '/account',
       name: 'Account',
       component: () => import('../views/akun.vue')
+    },
+
+    {
+      path: '/bmi',
+      name: 'bmi',
+      component: () => import('../views/bmi.vue')
     },
     
 
