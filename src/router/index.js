@@ -18,8 +18,8 @@ const router = createRouter({
 
     {
       path: '/account',
-      name: 'condition',
-      component: () => import('../views/condition.vue')
+      name: 'Account',
+      component: () => import('../views/Account.vue')
     },
     
 
