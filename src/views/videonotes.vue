@@ -13,7 +13,7 @@ import router from "../router"
 export default {
     methods: {
         redirect(){
-            router.push({name : 'condition'})
+            router.push({name : 'Account'})
     }}
 }
 </script>
