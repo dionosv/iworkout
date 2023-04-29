@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import {Account} from '../views/Account.vue'
-import {Dashboard} from '../views/Dashboard.vue'
+// import {Dashboard} from '../views/Dashboard.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,11 +10,11 @@ const router = createRouter({
       name: 'home',
       component: () => import('../views/HomeView.vue')
     },
-    {
-      path: '/success',
-      name: 'Success',
-      component: {Dashboard}
-    },
+    // {
+    //   path: '/success',
+    //   name: 'Success',
+    //   component: {Dashboard}
+    // },
     {
       path: '/account',
       name: 'Account',
