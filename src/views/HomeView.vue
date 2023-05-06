@@ -64,6 +64,7 @@ export default{
     display: none;
   }
 
+
 @media (max-width: 777px) {
   .wrap {
     display: none;
@@ -86,6 +87,8 @@ export default{
     height: 100%;
     filter: brightness(60%);
   }
+
+  
 }
 
 

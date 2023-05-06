@@ -29,7 +29,9 @@ export default{
 <RouterView/>
 </template>
 
-<style scoped>
+<style>
+@import url('/public/font.css');
+
 #log {
     width: 150px;
     height: auto;

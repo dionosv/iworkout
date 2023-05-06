@@ -234,7 +234,7 @@
     }
     
     .main2 h4{
-        font-weight: bold;
+        font-family: 'Inter-ExtraBold';
     }
     .mainlogo{
         width: auto;
@@ -246,10 +246,7 @@
         display: flex;
         justify-content: center;
     }
-    
-
-    
-    
+        
     .showpass{
         -webkit-user-select: none; /* Safari */
         -ms-user-select: none; /* IE 10 and IE 11 */
@@ -257,6 +254,7 @@
         font-size: 13px;
         margin-top: 5%;
         margin-bottom: 3%;
+        font-family: 'Inter-Medium';
     }
     
     .showpass img{
@@ -272,10 +270,12 @@
     
     #fr{
         text-align: left;
-        margin-top:3%
+        margin-top:3%;
+        font-family: 'Inter-Bold';
     }
     
     #fr input{
+        font-family: 'Inter-Medium';
         width: 100%;
         height: 40px;
         border: none;
@@ -293,13 +293,6 @@
         display: flex;
         flex-direction: column;
         align-content: space-between;
-    }
-    
-    form{
-        margin-top: 30px;
-        width: 410px;
-        background-color: #F1F6F9;
-        padding: 20px;
-        border-radius: 8px;
+        font-family: 'Inter-SemiBold';
     }
     </style>

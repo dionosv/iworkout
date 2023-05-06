@@ -1,7 +1,6 @@
 <template>
-<Login v-if="condition"></Login>
-<Signup v-else></Signup>
-
+        <Login v-if="condition"></Login>
+        <Signup v-else></Signup>
 <div class="middle">
     <label class="signuptxt"><a href="#" @click="changestate">{{tmp1}}</a> {{ tmp2 }}</label>
 </div>
@@ -40,11 +39,10 @@ export default {
 
 <style>
 
-
 .middle {      
     display: flex;
     justify-content: center;
-
+    font-family: 'Inter-SemiBold';
 }
 
 .signuptxt{
@@ -56,4 +54,21 @@ export default {
 .signuptxt a{
         text-decoration: none;
     }
+
+form{
+    margin-top: 30px;
+    width: 410px;
+    padding: 15px;
+    margin-bottom: 3%;
+    border-radius: 25px;
+    background: linear-gradient(155deg, #ffffff, #d4dee4);
+    box-shadow:  23px 23px 46px #c6c6c6,
+             -23px -23px 46px #ffffff;
+}
+
+@media (max-width: 777px) {
+    form{
+        width: 330px;
+    }
+}
 </style>

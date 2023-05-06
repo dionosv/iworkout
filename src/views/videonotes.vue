@@ -29,11 +29,17 @@ img{
     margin-bottom: 2%;
     font-size: 80px;
     font-weight: bold;
+    font-family: 'Inter-ExtraBold';
 }
 
 .pesan h3{
     margin-top: 3%;
     margin-bottom: 3%;
+    font-family: 'Inter-Medium';
 }
 
+.pesan button{
+    font-family: 'Inter-SemiBold';
+
+}
 </style>

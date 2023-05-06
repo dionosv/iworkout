@@ -37,12 +37,9 @@
 
         <div class="tmb">
             <button type="submit" class="btn btn-primary" id="fr2">Sign In</button>
-            <!-- <label class="signuptxt"><router-link to="/signup">Sign Up</router-link> if you don't have an account</label> -->
         </div>
 
     </form>
-    <!-- <button type="button" class="btn btn-success" @click="logout">remove</button> -->
-
 </div>
 </template>
 
@@ -101,7 +98,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped >
 
 .main{
     display: flex;
@@ -110,7 +107,7 @@ export default {
 }
 
 .main2 h4{
-    font-weight: bold;
+    font-family: 'Inter-ExtraBold';
 }
 .mainlogo{
     width: auto;
@@ -120,16 +117,7 @@ export default {
 }
 .login{
     display: flex;
-  justify-content: center;
-}
-
-.signuptxt{
-    margin-top: 5%;
-    font-size: 12px ;
-}
-
-.signuptxt a{
-    text-decoration: none;
+    justify-content: center;
 }
 
 
@@ -140,6 +128,7 @@ export default {
     font-size: 13px;
     margin-top: 5%;
     margin-bottom: 3%;
+    font-family: 'Inter-Medium';
 }
 
 .showpass img{
@@ -151,14 +140,17 @@ export default {
 #alert {
     margin-top: 6%;
     margin-bottom: 6%;
+    font-family: 'Inter-SemiBold';
 }
 
 #fr{
     text-align: left;
-    margin-top:3%
+    margin-top:3%;
+    font-family: 'Inter-Bold';
 }
 
 #fr input{
+    font-family: 'Inter-Medium';
     width: 100%;
     height: 40px;
     border: none;
@@ -176,13 +168,8 @@ export default {
     display: flex;
     flex-direction: column;
     align-content: space-between;
+    font-family: 'Inter-SemiBold';
 }
 
-form{
-    margin-top: 30px;
-    width: 410px;
-    background-color: #F1F6F9;
-    padding: 20px;
-    border-radius: 8px;
-}
+
 </style>
