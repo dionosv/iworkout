@@ -69,7 +69,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .main{
     margin-bottom: 3%;
 }
@@ -79,6 +79,9 @@ export default {
     justify-content: center;
 }
 
+.main2 h4{
+    font-family: 'Inter-ExtraBold';
+}
 .whiteborder{
     background: white;
     border-radius: 3%;
@@ -109,5 +112,10 @@ export default {
 
 #details label{
     font-size: 20px;
+    font-family: 'Inter-Medium';
+}
+
+#details button{
+    font-family: 'Inter-SemiBold';
 }
 </style>
