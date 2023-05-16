@@ -34,15 +34,15 @@
             <h3 id="desc">
                 {{ notes }}
             </h3>
+            <!-- <button v-if="acc">Save BMI</button> -->
         </div>
     </Transition>
-    </div>
-    
-    
+    </div>    
 
 </template>
 
 <script>
+import { checkstate } from './func/all';
 export default {
     data() {
         return {
@@ -52,8 +52,13 @@ export default {
             notes : null,
             prompt : 'BMI',
             state : false,
+            acc:true
         }
     },
+    mounted() {
+        this.acc=checkstate()
+    },
+
     watch: {
         berat(newWeight, oldWeight) {
 

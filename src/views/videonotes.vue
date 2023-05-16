@@ -13,7 +13,7 @@ import router from "../router"
 export default {
     methods: {
         redirect(){
-            router.push({name : 'Account'})
+            router.push({name : 'decide'})
     }}
 }
 </script>
@@ -40,6 +40,11 @@ img{
 
 .pesan button{
     font-family: 'Inter-SemiBold';
+}
 
+.pesan{
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 </style>

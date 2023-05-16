@@ -12,7 +12,7 @@ export function logout(){
 
 export function getemail() {
     if(checkstate() == true){
-        const{email, logintime} = JSON.parse(localStorage.getItem('SessionDetail'))
+        const{email, userID, logintime} = JSON.parse(localStorage.getItem('SessionDetail'))
         return email
     }
     else return "Not logged in"
@@ -21,7 +21,7 @@ export function getemail() {
 export function checkstate() {
     const loginstate = localStorage.getItem('SessionDetail')
     if(loginstate != null){
-        const{ email, logintime } = JSON.parse(loginstate)
+        const{ email, userID, logintime } = JSON.parse(loginstate)
 
         if(email){
             const currentDate = new Date()
@@ -49,11 +49,11 @@ export function checkstate() {
        
 }
 
+
+
 export async function login(email, pw){
     try{
-        await signInWithEmailAndPassword(getAuth(), email, pw)
-        const detail = { email : email, logintime : new Date().toISOString()}
-        localStorage.setItem('SessionDetail', JSON.stringify(detail))
+        await signInWithEmailAndPassword(getAuth(), email, pw)        
         return {
             status : true,
             msg : null
@@ -68,6 +68,10 @@ export async function login(email, pw){
     }
 }
 
+export function savestate(email,xid){
+    const detail = { email : email, userID : xid, logintime : new Date().toISOString()}
+    localStorage.setItem('SessionDetail', JSON.stringify(detail))
+}
 export async function getdata(){
     const querySnapshot = await getDocs(collection(db, "userdata"));
     querySnapshot.forEach((doc) => {

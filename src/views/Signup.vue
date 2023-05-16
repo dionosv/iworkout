@@ -70,7 +70,7 @@
     </template>
     
     <script>
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+    import { getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
     import {db} from './func/firedata'
     import { login } from './func/all';
     import { collection, addDoc } from "firebase/firestore";
@@ -137,6 +137,7 @@
                         nama : this.nama,
                         username : this.uname,
                         tgl_lahir : this.tgl,
+                        detaildata : false
                     });
                     this.green_alert("Sign Up Success, please wait redirecting to account")
                     this.signin1()

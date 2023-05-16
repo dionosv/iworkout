@@ -58,7 +58,8 @@ export default {
                 this.displayname = doc.data().nama
             });
             this.render = true
-        }
+        },
+
 
     },
 

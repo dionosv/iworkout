@@ -28,8 +28,17 @@ const router = createRouter({
       path: '/bmi',
       name: 'bmi',
       component: () => import('../views/bmi.vue')
+    },  
+
+    {
+      path : '/app',
+      name : 'decide',
+      component: () => import('../views/decide.vue')
     },
-    
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/'
+    },
 
   ]
 })

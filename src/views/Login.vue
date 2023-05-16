@@ -45,8 +45,9 @@
 
 <script>
 import router from '@/router'
-import {getAuth, signInWithEmailAndPassword} from "firebase/auth"
-import {logout ,login} from './func/all'
+import {db} from'./func/firedata'
+import { getDocs, query, collection, where} from "firebase/firestore";
+import {logout ,login, savestate} from './func/all'
 
 export default {
     data() {
@@ -56,7 +57,8 @@ export default {
             masuk : "",
             pw : "",
             toogle : true,
-            fpass : "show"
+            fpass : "show",
+            xid :"",
         }
     },
     methods: {
@@ -74,6 +76,15 @@ export default {
             }
         },
 
+        async findID(email){
+            const userdataRef = collection(db, "userdata");
+            const q = query(userdataRef, where("email", "==", email));
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                this.xid = doc.id
+            });
+        },
+
         user_logout(){
             logout()
         },
@@ -85,8 +96,9 @@ export default {
         signin(){
             (async () => {
             const {status, msg} = await login(this.email, this.pw);
-
             if (status === true) {
+                await this.findID(this.email)
+                savestate(this.email,this.xid,this.name)
                 window.location.reload();
             } else {
                 this.red_alert(msg)
