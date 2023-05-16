@@ -28,7 +28,6 @@ img{
     margin-top: 2%;
     margin-bottom: 2%;
     font-size: 80px;
-    font-weight: bold;
     font-family: 'Inter-ExtraBold';
 }
 

@@ -34,7 +34,19 @@
             <h3 id="desc">
                 {{ notes }}
             </h3>
-            <!-- <button v-if="acc">Save BMI</button> -->
+            <button v-if="shownbtn" class="btn btn-dark" id="saveacc" @click="saveprocedure">Save BMI</button>
+        </div>
+    </Transition>
+    </div>    
+
+
+    <div class="bmi2" v-if="savebtn">
+        <Transition>
+        <div class="keluar">
+            <div class="reminder">
+                <img src="@/components/icons/success.png" alt="">
+                Data Saved !
+            </div>
         </div>
     </Transition>
     </div>    
@@ -52,7 +64,9 @@ export default {
             notes : null,
             prompt : 'BMI',
             state : false,
-            acc:true
+            acc:true,
+            savebtn:false,
+            shownbtn:false
         }
     },
     mounted() {
@@ -61,7 +75,6 @@ export default {
 
     watch: {
         berat(newWeight, oldWeight) {
-
             this.cekbmi();
         },
         tinggi(newHeight, oldHeight) {
@@ -72,7 +85,8 @@ export default {
     methods: {
         cekbmi(){
             if(this.tinggi && this.berat){
-                if((this.berat >= 30 && this.berat <= 300) && ( this.tinggi > 100 && this.tinggi < 250 )){
+                if((this.berat >= 30 && this.berat <= 300) && ( this.tinggi > 100 && this.tinggi < 220 )){
+                    this.tooglebutton()
                     this.result = (this.berat / this.tinggi / this.tinggi * 10000).toFixed(1)
                     //keterangan
                     if(this.result<18.5){
@@ -88,12 +102,34 @@ export default {
                         this.notes = 'Obesity'
                     }
                     this.state = true
+                    
                 }
             }
             else {
                 this.result = ""
                 this.notes = ""
                 this.state = false
+            }
+        },
+        saveprocedure(){
+            //toogle procedure
+            if(!this.savebtn){//if false baru bisa di pencet, jd gabisa di pencet pencet
+                this.savebtn = !this.savebtn
+                setTimeout(() => {
+                    this.savebtn = !this.savebtn
+                }, 3000);
+                //disable button
+                this.tooglebutton()
+
+                
+            }
+        },
+        tooglebutton(){
+            if(this.acc){//if login
+                this.shownbtn = !this.shownbtn
+            }
+            else{
+                this.shownbtn = false
             }
         }
     },
@@ -156,7 +192,7 @@ form{
 
 .v-enter-active,
 .v-leave-active {
-  transition: opacity 0.75s ease-in-out;
+  transition: opacity 1s ease-in-out;
 }
 
 .v-enter-from,
@@ -164,7 +200,18 @@ form{
   opacity: 0;
 }
 
+.reminder{ 
+    font-family: "Inter-SemiBold";
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+}
 
+.reminder img{
+    height: 35px;
+    width: auto;
+    margin-right: 10px;
+}
 .bmi{
     display: flex;
     justify-content: center;
@@ -196,6 +243,12 @@ form{
 
 .keluar label{
     font-family: 'Inter-Light';
+}
+
+#saveacc{
+    margin-top: 3%;
+    margin-bottom : 3%;
+    font-family: 'Inter-SemiBold';
 }
 
 @media (max-width: 777px) {
