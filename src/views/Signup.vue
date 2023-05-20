@@ -137,7 +137,9 @@
                         nama : this.nama,
                         username : this.uname,
                         tgl_lahir : this.tgl,
-                        detaildata : false
+                        detaildata : false,
+                        detail1:false, //bmi
+                        detail2:false //preferences
                     });
                     this.green_alert("Sign Up Success, please wait redirecting to account")
                     this.signin1()

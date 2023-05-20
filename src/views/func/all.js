@@ -18,6 +18,14 @@ export function getemail() {
     else return "Not logged in"
 }
 
+export function getuserid() {
+    if(checkstate() == true){
+        const{email, userID, logintime} = JSON.parse(localStorage.getItem('SessionDetail'))
+        return userID
+    }
+    else return "Not logged in"
+}
+
 export function checkstate() {
     const loginstate = localStorage.getItem('SessionDetail')
     if(loginstate != null){

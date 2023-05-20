@@ -11,34 +11,40 @@
             </div>
 
             <div class="note">
-                <h4>Body Mass Index</h4>
+                <h4>Choose your exercise preferences</h4>
             </div>
 
             <div class="masukan">
-                <input type="number" placeholder="Weight (Kg)" v-model="berat">
-                <input type="number" placeholder="Height (Cm)" v-model="tinggi">
-            </div>
+                <label>Difficulty</label>
+                <select v-model="pilihan">
+                    <option value="0"></option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Expert">Expert</option>
+                </select>
 
+                <label>Categories</label>
+                <select v-model="pilihan2">
+                    <option value="0"></option>
+                    <option value="Barbell">Barbell</option>
+                    <option value="Dumbbells">Dumbbells</option>
+                    <option value="Kettlebells">Kettlebells</option>
+                    <option value="Stretches">Stretches</option>
+                    <option value="Cables">Cables</option>
+                    <option value="Band">Band</option>
+                    <option value="Plate">Plate</option>
+                    <option value="TRX">TRX</option>
+                    <option value="Bodyweight">Bodyweight</option>
+                    <option value="Yoga">Yoga</option>
+                    <option value="Machine">Machine</option>
+                </select>
+            </div>
+            <div class="mid">
+                <button v-if="shownbtn" class="btn btn-dark" id="saveacc" @click.prevent="saveprocedure">Save Options</button>
+            </div>
             
         </form>
     </div>
-
-    <div class="bmi2">
-        <Transition>
-        <div class="keluar" v-if="state">
-            <label>BMI</label>
-            <h2>
-                {{ result }}
-            </h2>
-            <label>Status</label>
-            <h3 id="desc">
-                {{ notes }}
-            </h3>
-            <button v-if="shownbtn" class="btn btn-dark" id="saveacc" @click="saveprocedure">Save BMI</button>
-        </div>
-    </Transition>
-    </div>    
-
 
     <div class="bmi2" v-if="savebtn">
         <Transition>
@@ -61,62 +67,25 @@ import { doc, updateDoc } from 'firebase/firestore';
 export default {
     data() {
         return {
-            tinggi : null,
-            berat : null,
-            result : null,
             notes : null,
-            prompt : 'BMI',
+            prompt : 'Options',
             state : false,
             acc:true,
             savebtn:false,
-            shownbtn:false
+            shownbtn:true,
+            pilihan : "",
+            pilihan2 : ""
         }
     },
     mounted() {
         this.acc=checkstate()
     },
-
-    watch: {
-        berat(newWeight, oldWeight) {
-            this.cekbmi();
-        },
-        tinggi(newHeight, oldHeight) {
-            this.cekbmi();
-        }
-  },
        
     methods: {
-        cekbmi(){
-            if(this.tinggi && this.berat){
-                if((this.berat >= 30 && this.berat <= 300) && ( this.tinggi > 100 && this.tinggi < 220 )){
-                    this.tooglebutton()
-                    this.result = (this.berat / this.tinggi / this.tinggi * 10000).toFixed(1)
-                    //keterangan
-                    if(this.result<18.5){
-                        this.notes = 'Underweight'
-                    }
-                    else if(this.result>=18.5 && this.result<=24.9){
-                        this.notes = 'Healthy'
-                    }
-                    else if(this.result>=25 && this.result<=29.9 ){
-                        this.notes =  'Overweight'
-                    }
-                    else if(this.result >= 30){
-                        this.notes = 'Obesity'
-                    }
-                    this.state = true
-                    
-                }
-            }
-            else {
-                this.result = ""
-                this.notes = ""
-                this.state = false
-            }
-        },
         saveprocedure(){
             //toogle procedure
-            if(!this.savebtn){//if false baru bisa di pencet, jd gabisa di pencet pencet
+            const hasil = this.crosscheck()
+            if(!this.savebtn && hasil){//if false baru bisa di pencet, jd gabisa di pencet pencet
                 this.savebtn = !this.savebtn
                 this.upload()
                 setTimeout(() => {
@@ -124,29 +93,25 @@ export default {
                 }, 3000);
                 //disable button
                 this.tooglebutton()
+
                 setTimeout(() => {
                     router.push({name : "decide"})
                 }, 3000);
             }
         },
-        tooglebutton(){
-            if(this.acc){//if login
-                this.shownbtn = !this.shownbtn
-            }
-            else{
-                this.shownbtn = false
-            }
+        tooglebutton(){this.shownbtn = !this.shownbtn},
+        crosscheck(){
+            if(this.pilihan.length==0 && this.pilihan2.length == 0){return false}
+            return true
         },
 
         async upload(){
             const tmp = doc(db, "userdata", getuserid());
             await updateDoc(tmp, {
-                detail1: true,
-                bmidata  : {
-                    userweight : this.berat,
-                    userheight : this.tinggi,
-                    userbmi : this.result,
-                    usernotes : this.notes
+                detail2: true,
+                preferencesdata  : {
+                    difficulty : this.pilihan,
+                    categories : this.pilihan2,
                 }
             });
         }
@@ -188,13 +153,34 @@ export default {
     flex-direction: column;
 }
 
-.masukan input{ 
+.masukan label {
+    font-family: "Inter-Regular";
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.mid{
+    display: flex;
+    justify-content: center;
+}
+
+.masukan{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.masukan select{ 
     border-radius: 6px;
     margin-top: 2%;
     margin-bottom: 2%;
     width: 100%;
     padding: 2%;
     border-style: none;
+    color: black;
+    font-family: "Inter-SemiBold";
+}
+
+.masukan option{
+    font-family: "Inter-Regular";
 }
 
 form{
@@ -267,6 +253,9 @@ form{
     margin-top: 3%;
     margin-bottom : 3%;
     font-family: 'Inter-SemiBold';
+
+    display: flex;
+    justify-content: center;
 }
 
 @media (max-width: 777px) {
