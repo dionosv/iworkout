@@ -77,7 +77,7 @@ export default {
         const filtered = this.exercises.filter(
             exercise => exercise.Difficulty === this.dif && exercise.Category === this.cat
         );
-        return filtered.slice(0, 5);
+        return filtered.slice(0, 10);
         },
     },
 
