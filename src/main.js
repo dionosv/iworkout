@@ -11,7 +11,4 @@ const app = createApp(App)
 initializeApp(firebaseConfig);
 
 app.use(router)
-
 app.mount('#app')
-
-

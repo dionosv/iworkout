@@ -2,7 +2,7 @@
     <div class="content" v-if="render">
         <div class="greeting">
             <h2>Hello, {{ displayname }}</h2>
-            <h3>fill out the fields below</h3>
+            <h3>choose your preferences below</h3>
         </div>
 
         <div class="allblock">
@@ -16,16 +16,37 @@
                     Exercises
                     </div>
             </router-link>
-            <router-link to="/">
-                    <div class="square">
-                    Food
+            
+        </div>
+
+        <div class="detail">     
+        <table>
+            <div class="title">
+                <h3>Exercise List</h3>
+                <h5>Category : {{ this.cat  }}</h5>
+                <h5>Difficulty : {{ this.dif  }}</h5>
+                <h4>Do this exercise that listed below</h4>
+            </div>
+            <tbody>
+                <tr v-for="exercise in filteredExercises" :key="exercise.id">
+                    <div class="bagi">
+                        <h2>
+                            <td>{{ exercise.exercise_name }}</td>
+                        </h2>
+                        <video width="320" height="240" controls autoplay muted loop>
+                            <source :src="exercise.videoURL[0]" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <h4>
+                            <td>{{ exercise.steps[0] }}</td>
+
+                        </h4>
                     </div>
-            </router-link>
+                </tr>
+            </tbody>
+        </table>
         </div>
 
-        <div class="bodystatus">
-
-        </div>
     </div>
 
     <div class="avoid">
@@ -36,6 +57,7 @@
 </template>
 
 <script>
+import workoutData from './func/workoutdb.json';
 import { getemail } from './func/all';
 import { getDocs, query, collection, where} from "firebase/firestore";
 import {db} from'./func/firedata'
@@ -44,9 +66,21 @@ export default {
         return {
             displayname : 'User',
             datastate : false,
-            render :false
+            render :false,
+            exercises: workoutData,
+            dif : 'x',
+            cat : 'x'
         }
     },
+    computed: {
+        filteredExercises() {
+        const filtered = this.exercises.filter(
+            exercise => exercise.Difficulty === this.dif && exercise.Category === this.cat
+        );
+        return filtered.slice(0, 5);
+        },
+    },
+
     methods: {
         async detailprocedure(email) {
             const userdataRef = collection(db, "userdata");
@@ -55,6 +89,8 @@ export default {
             querySnapshot.forEach((doc) => {
                 this.displayname = doc.data().nama
                 this.datastate = doc.data().detaildata
+                this.dif = doc.data().preferencesdata.difficulty
+                this.cat = doc.data().preferencesdata.categories
             });
             this.render = true
         },
@@ -108,10 +144,11 @@ export default {
     .allblock{
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         flex-direction: row; 
         margin-left:  15% ;
         margin-right: 15%;
+        gap: 15px;
     }
 
     .allblock a{
@@ -137,5 +174,61 @@ export default {
         font-family: "Inter-Regular";
         font-size: 15px;
     }
+
+    .detail{
+        margin : 25px;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .detail h2{
+        font-family: 'Inter-Bold';
+        font-size: 20px;
+    }
+
+    .detail h3{
+        font-family: 'Inter-Regular';
+        font-size: 15px;
+    }
+
+    table{
+        margin-top: 35px;
+    }
+
+    .bagi{
+        display: flex;
+        align-content: center;
+        flex-direction: column;
+        margin-top: 15px;
+    }
+
+    .bagi h2{
+        font-family: 'Inter-Bold';
+        font-size: 20px;
+    }
+
+    .bagi h4{
+        font-family: 'Inter-Regular';
+        font-size: 13px;
+    }
+
+    .title h3{
+        font-family: 'Inter-Bold';
+        font-size: 25px;
+    }
+
+    .title h4{
+        font-family: 'Inter-SemiBold';
+        font-size: 15px;
+    }
+    .title h5{
+        font-family: 'Inter-Regular';
+        font-size: 15px;
+    }
+
+
+
 }
 </style>
