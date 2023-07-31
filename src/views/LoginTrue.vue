@@ -15,7 +15,7 @@
 
             <div class="whiteborder">
                 <div id="details">
-                    <label>Welcome, {{ displayname }}</label>
+                    <label>Hello, {{ displayname }}</label>
                 </div>
 
                 <div id="details">
@@ -91,10 +91,11 @@ export default {
 
 .kotak{
     margin-top: 30px;
-    width: 410px;
+    width: 380px;
     background-color: #F1F6F9;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 10px;
+    margin: 25px;
 }
 
 .main1 {
@@ -107,13 +108,15 @@ export default {
     display: flex;
     justify-content: center;
     align-self: center;
-    margin-top: 5%;
+    margin-top: 10%;
     margin-bottom: 5%
 }
 
 #details label{
     font-size: 20px;
     font-family: 'Inter-Medium';
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 #details button{
