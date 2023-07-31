@@ -2,7 +2,6 @@
     <div class="content" v-if="render">
         <div class="greeting">
             <h2>Hello, {{ displayname }}</h2>
-            <h3>choose your preferences below</h3>
         </div>
 
         <div class="allblock">
@@ -11,21 +10,18 @@
                     BMI
                     </div>
             </router-link>
-            <router-link to="/exercise">
-                    <div class="square">
-                    Exercises
-                    </div>
-            </router-link>
-            
         </div>
 
         <div class="detail">     
         <table>
             <div class="title">
                 <h3>Exercise List</h3>
+                <h5>
+                    <router-link to="/exercise">Edit your preferences</router-link>
+                </h5>
                 <h5>Category : {{ this.cat  }}</h5>
                 <h5>Difficulty : {{ this.dif  }}</h5>
-                <h4>Do this exercise that listed below</h4>
+                <!-- <h4>Do this exercise that listed below</h4> -->
             </div>
             <tbody>
                 <tr v-for="exercise in filteredExercises" :key="exercise.id">
@@ -39,7 +35,6 @@
                         </video>
                         <h4>
                             <td>{{ exercise.steps[0] }}</td>
-
                         </h4>
                     </div>
                 </tr>
@@ -69,7 +64,7 @@ export default {
             render :false,
             exercises: workoutData,
             dif : 'x',
-            cat : 'x'
+            cat : 'x',
         }
     },
     computed: {
@@ -77,7 +72,7 @@ export default {
         const filtered = this.exercises.filter(
             exercise => exercise.Difficulty === this.dif && exercise.Category === this.cat
         );
-        return filtered.slice(0, 10);
+        return filtered.slice(0, 15);
         },
     },
 
@@ -162,7 +157,7 @@ export default {
         justify-content: center;
         flex-direction: column;
         margin-top: 50px;
-        margin-bottom: 7%;
+        margin-bottom: 6%;
     }
 
     .greeting h2{
@@ -227,8 +222,5 @@ export default {
         font-family: 'Inter-Regular';
         font-size: 15px;
     }
-
-
-
 }
 </style>
