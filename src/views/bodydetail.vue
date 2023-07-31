@@ -33,9 +33,11 @@
                             <source :src="exercise.videoURL[0]" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
-                        <h4>
-                            <td>{{ exercise.steps[0] }}</td>
-                        </h4>
+                        <h3>how to do it ?</h3>
+                        <div class="howto">
+                            <h4 v-for="(item, index) in exercise.steps" :key="index">{{index+1}}. {{ item }}</h4>
+                        </div>
+                        
                     </div>
                 </tr>
             </tbody>
@@ -170,6 +172,12 @@ export default {
         font-size: 15px;
     }
 
+    .howto h4{
+        display: flex;
+        align-content: center;
+        flex-direction: row;
+    }
+
     .detail{
         margin : 25px;
         display:flex;
@@ -197,6 +205,7 @@ export default {
         align-content: center;
         flex-direction: column;
         margin-top: 15px;
+        margin-bottom: 15px;
     }
 
     .bagi h2{
